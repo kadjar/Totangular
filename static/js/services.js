@@ -5,28 +5,31 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-angular.module('myApp.services', []).
+angular.module('totangular.services', []).
   value('version', '0.1').
-  factory('socket', function ($rootScope) {
-    var socket = io.connect();
+  factory('toto', function ($rootScope) {
+    var toto = new Toto('/service');
     return {
-      on: function (eventName, callback) {
-        socket.on(eventName, function () {  
-          var args = arguments;
-          $rootScope.$apply(function () {
-            callback.apply(socket, args);
-          });
-        });
+      request: function (eventName, args) {
+        return toto.request(eventName, args);
       },
-      emit: function (eventName, data, callback) {
-        socket.emit(eventName, data, function () {
-          var args = arguments;
-          $rootScope.$apply(function () {
-            if (callback) {
-              callback.apply(socket, args);
-            }
-          });
-        })
+      sessionID: function () {
+        return toto.sessionID();
+      },
+      logout: function() {
+        return toto.logout();
       }
+      
+      // Example of a service with a callback
+      //
+      // on: function (eventName, callback) {
+      //   socket.on(eventName, function () {  
+      //     var args = arguments;
+      //     $rootScope.$apply(function () {
+      //       callback.apply(socket, args);
+      //     });
+      //   });
+      // },
+
     };
   });
