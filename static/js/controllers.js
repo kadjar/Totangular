@@ -22,7 +22,7 @@ function MyCtrl1($scope, toto) {
       $('#logged-in').addClass('hidden');
     }
   }
-  
+
   $('#login').on('click', function () { 
     toto.request('account.login', {'user_id': $('#email').val(), 'password': $('#pass').val()}).then(function(){
       updateUI();
@@ -44,6 +44,7 @@ function MyCtrl1($scope, toto) {
     toto.logout();
     updateUI();
   });
+  
   updateUI();
 }
 MyCtrl1.$inject = ['$scope', 'toto'];
