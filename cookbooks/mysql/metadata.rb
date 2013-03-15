@@ -64,7 +64,7 @@ attribute "mysql/tunable/max_connections",
 
 attribute "mysql/tunable/wait_timeout",
   :display_name => "MySQL Tunable Wait Timeout",
-  :default => "180"
+  :default => "86400"
 
 attribute "mysql/tunable/net_read_timeout",
   :display_name => "MySQL Tunable Net Read Timeout",
