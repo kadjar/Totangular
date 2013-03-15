@@ -23,28 +23,28 @@ function MyCtrl1($scope, toto) {
     }
   }
 
-  $('#login').on('click', function () { 
+  $scope.login = function () { 
     toto.request('account.login', {'user_id': $('#email').val(), 'password': $('#pass').val()}).then(function(){
       updateUI();
     }).error(function(e){
       $('.alert').removeClass('hidden').text(e.value);
     })
-  });
+  };
 
-  $('#signup').click(function(){
+  $scope.signup = function(){
     toto.request('account.create', {'user_id': $('#email').val(), 'password': $('#pass').val()}).then(function(){
       updateUI();
     }).error(function(e){
       $('.alert').removeClass('hidden').text(e.value);
     })
-  });
+  };
 
-  $('#count').click(updateCount);
-  $('#logout').click(function(){
+  $scope.count = function() { updateCount() };
+  $scope.logout = function(){
     toto.logout();
     updateUI();
-  });
-  
+  };
+
   updateUI();
 }
 MyCtrl1.$inject = ['$scope', 'toto'];
