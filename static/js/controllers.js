@@ -6,6 +6,8 @@ function AppCtrl($scope, toto) {
 }
 
 function MyCtrl1($scope, toto) {
+  $scope.errorHidden = true;
+
   function updateCount() {
     toto.request("count", {}).then(function(response){
       $('#output').append($('<p>').text(response.count));
@@ -14,28 +16,30 @@ function MyCtrl1($scope, toto) {
 
   function updateUI() {
     if (toto.sessionID()) {
-      $('#unauth').addClass('hidden');
-      $('#logged-in').removeClass('hidden');
+      $scope.userSignedIn = true;
       updateCount();
     } else {
-      $('#unauth').removeClass('hidden');
-      $('#logged-in').addClass('hidden');
+      $scope.userSignedIn = false;
     }
   }
 
   $scope.login = function () { 
-    toto.request('account.login', {'user_id': $('#email').val(), 'password': $('#pass').val()}).then(function(){
+    toto.request('account.login', {'user_id': $scope.email, 'password': $scope.password}).then(function(){
       updateUI();
+      $scope.errorHidden = true;
     }).error(function(e){
-      $('.alert').removeClass('hidden').text(e.value);
+      $scope.errorHidden = false;
+      $scope.errorText = e.value;
     })
   };
 
   $scope.signup = function(){
-    toto.request('account.create', {'user_id': $('#email').val(), 'password': $('#pass').val()}).then(function(){
+    toto.request('account.create', {'user_id': $scope.email, 'password': $scope.password}).then(function(){
       updateUI();
+      $scope.errorHidden = true;
     }).error(function(e){
-      $('.alert').removeClass('hidden').text(e.value);
+      $scope.errorHidden = false;
+      $scope.errorText = e.value;
     })
   };
 

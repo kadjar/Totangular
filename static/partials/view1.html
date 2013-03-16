@@ -1,14 +1,14 @@
 <div id='viewOne'>
-<div class='alert alert-error hidden'></div>
-      <div id="unauth">
+<div class='alert hidden-{{errorHidden}}'>{{errorText}}</div>
+      <div id="unauth" class="hidden-{{userSignedIn}}">
         <form ng-submit="login()">
-          <input id="email" type="email" placeholder="Email"/>
-          <input id="pass" type="password" placeholder="Password"/>
+          <input id="email" type="email" placeholder="Email" ng-model="email"/>
+          <input id="pass" type="password" placeholder="Password" ng-model="password"/>
           <button id="login" class="btn btn-primary" value="submit">Log in</button>
           <button id="signup" class="btn" ng-click="signup()">Sign up</button>
         </form>
       </div>
-      <div id="logged-in" class="hidden">
+      <div id="logged-in" class="hidden-{{!userSignedIn}}">
         <button id="count" class="btn" ng-click="count()">Count</button>
         <button id="logout" class="btn btn-danger" ng-click="logout()">Log out</button>
         <div id="output">
