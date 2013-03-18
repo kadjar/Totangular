@@ -8,16 +8,19 @@ function AppCtrl($scope, toto) {
 function MyCtrl1($scope, toto) {
   $scope.errorHidden = true;
 
-  function updateCount() {
+  $scope.count = [];
+
+  $scope.updateCount = function() {
     toto.request("count", {}).then(function(response){
-      $('#output').append($('<p>').text(response.count));
+      $scope.count.push(response.count)
+      //$('#output').append($('<p>').text(response.count));
     });
   }
 
   function updateUI() {
     if (toto.sessionID()) {
       $scope.userSignedIn = true;
-      updateCount();
+      $scope.updateCount();
     } else {
       $scope.userSignedIn = false;
     }
@@ -43,7 +46,7 @@ function MyCtrl1($scope, toto) {
     })
   };
 
-  $scope.count = function() { updateCount() };
+  //$scope.count = function() { updateCount() };
   $scope.logout = function(){
     toto.logout();
     updateUI();

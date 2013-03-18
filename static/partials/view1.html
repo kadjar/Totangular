@@ -9,9 +9,12 @@
         </form>
       </div>
       <div id="logged-in" class="hidden-{{!userSignedIn}}">
-        <button id="count" class="btn" ng-click="count()">Count</button>
+        <button id="count" class="btn" ng-click="updateCount()">Count</button>
         <button id="logout" class="btn btn-danger" ng-click="logout()">Log out</button>
-        <div id="output">
+        <div id="output" ng-init="count">
+          <p ng-repeat="val in count">
+            {{val}}
+          </p>
         </div>
       </div> 
 </div>
